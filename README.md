@@ -286,6 +286,8 @@ GROUP BY event
 ORDER BY participents DESC
 LIMIT 5;
 ```
+ ## **Expert Level(5 questions)**
+ 
 16. **Find the country that improved its medal tally the most from one Olympic edition to the next.**
 ```sql
 WITH Medal_Change AS (
