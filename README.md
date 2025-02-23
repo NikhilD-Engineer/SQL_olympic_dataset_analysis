@@ -177,7 +177,7 @@ WHERE sport = 'Swimming'
 ```
 5. **Count how many times the Olympic Games were held in London.**  
 ```sql
-SELECT * FROM game_summary
+SELECT COUNT(*) FROM game_summary
 WHERE city = 'London'
 ```
 ## **Intermediate Level (10 Questions)**  
