@@ -67,8 +67,8 @@ LIMIT 10;
 ```sql
 SELECT COUNT(*) FROM event_details
 ```
--- Creating table for event_results
-
+**Creating table for event_results**
+```sql
 DROP TABLE IF EXISTS event_results;
 CREATE TABLE event_results (
 	result_id VARCHAR,
@@ -84,18 +84,18 @@ CREATE TABLE event_results (
 	result_detail VARCHAR,
 	result_description VARCHAR
 )
-
--- Checking if data is imported correctly
-
+```
+**Checking if data is imported correctly**
+```sql
 SELECT * FROM event_results
 LIMIT 10;
-
--- Checking count of all imported entries
-
+```
+**Checking count of all imported entries**
+```sql
 SELECT COUNT(*) FROM event_results
-
--- Creating table for game summary
-
+```
+**Creating table for game summary**
+```sql
 DROP TABLE IF EXISTS game_summary;
 CREATE TABLE game_summary (
 	edition VARCHAR,	
@@ -110,18 +110,18 @@ CREATE TABLE game_summary (
 	competition_date VARCHAR,
 	isHeld VARCHAR
 )
-
--- Checking imported data 
-
+```
+**Checking imported data **
+```sql
 SELECT * FROM game_summary
 LIMIT 10;
-
--- Counting all the imported entries
-
+```
+**Counting all the imported entries**
+```sql
 SELECT COUNT(*) FROM game_summary
-
--- Creating table for medal tally history
-
+```
+**Creating table for medal tally history**
+```sql
 DROP TABLE IF EXISTS medal_tally;
 CREATE TABLE medal_tally (
 	edition VARCHAR,
@@ -134,31 +134,32 @@ CREATE TABLE medal_tally (
 	bronze INT,
 	total INT
  )
-
- -- Cheking imported data
-
+```
+ **Cheking imported data**
+```sql
  SELECT * FROM medal_tally
  LIMIT 10;
-
- -- Counting all the entries 
-
+```
+ **Counting all the entries**
+```sql
  SELECT COUNT(*) FROM medal_tally
+```
+ **All five tables have been imported**
 
- -- **All five tables have been imported**
+ ##DATA ANALYSIS
 
- -- ##DATA ANALYSIS
-
- -- ** Beginner Level(5 questions) **
- -- 1. **List all the unique sports played in the Olympics**
-
+ ## **Beginner Level(5 questions)**
+ 
+ 1. **List all the unique sports played in the Olympics**
+```sql
  SELECT DISTINCT(sport) FROM event_details;
-
- -- 2. **Find the total number of athletes in the dataset.**
-
+```
+ 2. **Find the total number of athletes in the dataset.**
+```sql
  SELECT COUNT(name) FROM athlete_bio;
-
- -- 3. **Retrieve the top 10 countries with the highest total medal count.**  
-
+```
+ 3. **Retrieve the top 10 countries with the highest total medal count.**  
+```sql
  SELECT 
     country, 
     SUM(gold + silver + bronze) AS total_medals
@@ -166,23 +167,23 @@ CREATE TABLE medal_tally (
  GROUP BY country
  ORDER BY total_medals DESC
  LIMIT 10;
-
--- 4. **Find all events where "Swimming" was played.**
-
+```
+4. **Find all events where "Swimming" was played.**
+```sql
 SELECT edition,
 		sport
 FROM event_details
 WHERE sport = 'Swimming'
-
--- 5. **Count how many times the Olympic Games were held in London.**  
-
+```
+5. **Count how many times the Olympic Games were held in London.**  
+```sql
 SELECT * FROM game_summary
 WHERE city = 'London'
+```
+## **Intermediate Level (10 Questions)**  
 
--- ### **Intermediate Level (10 Questions)**  
-
--- 6. **Find the average height and weight of male and female athletes.**
-
+6. **Find the average height and weight of male and female athletes.**
+```sql
 SELECT 
     sex, 
     ROUND(AVG(height::NUMERIC), 2) AS avg_height, 
@@ -191,9 +192,9 @@ FROM athlete_bio
 WHERE height ~ '^[0-9.]+$'   -- Ensures only digits and dots in height
   AND weight ~ '^[0-9.]+$'   -- Ensures only digits and dots in weight
 GROUP BY sex;
-
--- 7. **Get the country that won the most gold medals in any single Olympic edition.**
-
+```
+7. **Get the country that won the most gold medals in any single Olympic edition.**
+```sql
 SELECT 
 	edition,
 	country,
@@ -202,18 +203,18 @@ FROM medal_tally
 GROUP BY edition, country
 ORDER BY gold_medals DESC
 LIMIT 1;
-
--- 8. **Find the number of medals won by athletes from 'USA' in the '100m Sprint' event.**
-
+```
+8. **Find the number of medals won by athletes from 'USA' in the '100m Sprint' event.**
+```sql
 SELECT  
 		count(ed.country_noc) AS total_medals
 FROM event_details ed
 LEFT JOIN event_results er ON ed.result_id = er.result_id
 WHERE event_title IN ('100 metres, Men', '100 metres, Women')
 	AND ed.country_noc = 'USA'
-
--- 9. **Find the top 5 athletes who have won the most medals.** 
-
+```
+9. **Find the top 5 athletes who have won the most medals.** 
+```sql
 SELECT 
 	ab.athlete_id,
 	ab.name,
@@ -223,9 +224,9 @@ LEFT JOIN event_details ed ON ab.athlete_id = ed.athlete_id
 GROUP BY ab.athlete_id, ab.name, ed.medal
 ORDER BY total_medal DESC
 LIMIT 5;
-
--- 10. **Find the top 5 years with the highest number of participating athletes.**
-
+```
+10. **Find the top 5 years with the highest number of participating athletes.**
+```sql
 SELECT 
 		gs.year AS year,
 		COUNT(ed.athlete) AS participants
@@ -234,9 +235,9 @@ LEFT JOIN game_summary gs USING(edition_id)
 GROUP BY year
 ORDER BY COUNT(ed.athlete) DESC
 LIMIT 5;
-
--- 11. **Retrieve all athletes who have won medals in multiple sports.**
-
+```
+11. **Retrieve all athletes who have won medals in multiple sports.**
+```sql
 SELECT 
 	athlete,
 	COUNT(DISTINCT sport)  AS No_of_sports
@@ -245,9 +246,9 @@ WHERE medal IS NOT NULL
 GROUP BY athlete
 HAVING COUNT(DISTINCT sport) > 1
 ORDER BY COUNT(sport) DESC
-
--- 12. **Get the Olympic Games edition where the most medals were awarded.**  
-
+```
+12. **Get the Olympic Games edition where the most medals were awarded.**  
+```sql
 SELECT 
 	edition,
 	COUNT(medal) AS no_of_medals
@@ -255,18 +256,18 @@ FROM event_details
 WHERE medal IS NOT NULL
 GROUP BY edition
 ORDER BY COUNT(medal) DESC
-
--- 13. **Find the total number of medals won by each country across all editions.**
-
+```
+13. **Find the total number of medals won by each country across all editions.**
+```sql
 SELECT 
 	country,
 	SUM(total) AS total_medals
 FROM medal_tally
 GROUP BY country
 ORDER BY SUM(total) DESC
-
--- 14. **Find the most successful athlete (with the most gold medals).**
-
+```
+14. **Find the most successful athlete (with the most gold medals).**
+```sql
 SELECT 
 	athlete,
 	COUNT(medal) AS gold_medals
@@ -274,9 +275,9 @@ FROM event_details
 WHERE medal = 'Gold'
 GROUP BY athlete
 ORDER BY COUNT(medal) DESC
-
--- 15. **Find the top 5 Olympic events with the most participants across all editions.**  
-
+```
+15. **Find the top 5 Olympic events with the most participants across all editions.**  
+```sql
 SELECT 
 	event,
 	COUNT(DISTINCT athlete) AS participents
@@ -284,9 +285,9 @@ FROM event_details
 GROUP BY event
 ORDER BY participents DESC
 LIMIT 5;
-
--- 16. **Find the country that improved its medal tally the most from one Olympic edition to the next.**
-
+```
+16. **Find the country that improved its medal tally the most from one Olympic edition to the next.**
+```sql
 WITH Medal_Change AS (
     SELECT 
         country_noc, 
@@ -300,9 +301,9 @@ FROM Medal_Change
 WHERE prev_total IS NOT NULL
 ORDER BY medal_increase DESC
 LIMIT 1;
-
--- 17. **Find the sport with the highest ratio of gold medals to total medals.**
-
+```
+17. **Find the sport with the highest ratio of gold medals to total medals.**
+```sql
 SELECT 
 	sport,
 	SUM(CASE WHEN medal = 'Gold' THEN 1 ELSE 0
@@ -311,9 +312,9 @@ FROM event_details
 GROUP BY sport
 ORDER BY gold_ratio DESC
 LIMIT 1;
-
--- 18. Find the earliest and latest Olympic medalists.
-
+```
+18. Find the earliest and latest Olympic medalists.
+```sql
 SELECT 							-- Earliest olympic medalist
 	ed.athlete, 
 	ed.edition
@@ -329,9 +330,9 @@ FROM event_details ed
 WHERE ed.medal IS NOT NULL 
 ORDER BY ed.edition DESC
 LIMIT 1;
-
--- 19. **Determine if hosting the Olympics helps a country win more medals.**
-
+```
+19. **Determine if hosting the Olympics helps a country win more medals.**
+```sql
 
 WITH host_medals AS (
     SELECT 
@@ -362,9 +363,9 @@ LEFT JOIN non_host_medals nhm
     ON hm.host_country = nhm.country_noc  
 GROUP BY hm.host_country, nhm.avg_medals
 ORDER BY impact DESC;
-
--- 20. ** Find the correlation between athlete height and winning gold medals in Basketball.**
-
+```
+20. ** Find the correlation between athlete height and winning gold medals in Basketball.**
+```sql
 SELECT 
     CASE WHEN medal = 'Gold' THEN 'Gold Medalists' ELSE 'Non-Gold Athletes' END AS category,
     ROUND(AVG(height::FLOAT)) AS avg_height
@@ -372,4 +373,4 @@ FROM athlete_bio ab
 JOIN event_details ed ON ab.athlete_id = ed.athlete_id
 WHERE ed.sport = 'Basketball' AND height SIMILAR TO '[0-9]+(\.[0-9]*)?'  -- Filters valid numeric heights
 GROUP BY category;
-
+```
