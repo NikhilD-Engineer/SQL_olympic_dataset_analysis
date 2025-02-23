@@ -146,7 +146,7 @@ CREATE TABLE medal_tally (
 ```
  **All five tables have been imported**
 
- ##DATA ANALYSIS
+ ## DATA ANALYSIS
 
  ## **Beginner Level(5 questions)**
  
