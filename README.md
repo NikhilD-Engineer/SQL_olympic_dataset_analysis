@@ -398,3 +398,5 @@ This analysis provides a comprehensive understanding of Olympic history, uncover
 ## Author - Nikhil Dagale
 This project is part of my portfolio, showcasing the SQL skills essential for data analyst roles. If you have any questions, or feedback, or would like to collaborate, feel free to get in touch!
 
+Data Download link: https://www.kaggle.com/datasets/muhammadehsan02/126-years-of-historical-olympic-dataset
+All dataset credits to the original author. This data analysis is done for educational purpose only.
