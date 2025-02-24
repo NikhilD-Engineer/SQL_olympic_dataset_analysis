@@ -376,3 +376,25 @@ JOIN event_details ed ON ab.athlete_id = ed.athlete_id
 WHERE ed.sport = 'Basketball' AND height SIMILAR TO '[0-9]+(\.[0-9]*)?'  -- Filters valid numeric heights
 GROUP BY category;
 ```
+
+## Findings  
+1. **Diverse Olympic Sports**: The dataset includes a wide variety of sports, with unique disciplines played across different editions of the Olympics.  
+2. **USA's Dominance**: The USA consistently ranks among the top-performing nations, particularly in track events like the 100m Sprint.  
+3. **Athlete Characteristics**: Male athletes generally have a higher average height and weight than female athletes, with variations across sports.  
+4. **Host Country Advantage**: Countries hosting the Olympics tend to win more medals on average compared to their non-hosting performances.  
+5. **Multi-Sport Medalists**: A select group of athletes have won medals across multiple sports, showcasing their versatility in different disciplines.  
+
+
+## Report Highlights  
+1. **Data Cleaning & Validation**: Ensured complete and accurate data import by verifying row counts and data integrity.  
+2. **Exploratory Analysis**: Conducted initial analysis to understand the dataset’s structure, including unique sports, athlete demographics, and medal distributions.  
+3. **Performance Insights**: Identified top-performing countries, most successful athletes, and trends in medal-winning performances.  
+4. **Advanced Analysis**: Explored historical trends such as Olympic medal progressions, host country advantages, and athlete attributes linked to performance.  
+
+
+## Conclusion 
+This analysis provides a comprehensive understanding of Olympic history, uncovering trends in athlete performance, country dominance, and sport-specific insights. The findings suggest that hosting the Olympics positively impacts a country’s medal tally and that physical attributes such as height play a role in the success of certain sports like basketball. By leveraging SQL queries, we were able to extract meaningful insights that can help us understand patterns of success in the Olympic Games. Future work can involve integrating additional datasets, such as athlete training data or economic factors, to further deepen the analysis.  
+
+## Author - Nikhil Dagale
+This project is part of my portfolio, showcasing the SQL skills essential for data analyst roles. If you have any questions, or feedback, or would like to collaborate, feel free to get in touch!
+
