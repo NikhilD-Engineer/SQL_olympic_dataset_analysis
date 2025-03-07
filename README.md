@@ -395,8 +395,20 @@ GROUP BY category;
 ## Conclusion 
 This analysis provides a comprehensive understanding of Olympic history, uncovering trends in athlete performance, country dominance, and sport-specific insights. The findings suggest that hosting the Olympics positively impacts a country’s medal tally and that physical attributes such as height play a role in the success of certain sports like basketball. By leveraging SQL queries, we were able to extract meaningful insights that can help us understand patterns of success in the Olympic Games. Future work can involve integrating additional datasets, such as athlete training data or economic factors, to further deepen the analysis.  
 
+## How to Use This Project on GitHub
+
+- Clone the repository:
+git clone https://github.com/NikhilD-Engineer/SQL_olympic_dataset_analysis.git
+
+- Import the dataset into PostgreSQL 17.
+
+- Run the SQL queries provided in the repository.
+
+- Modify or expand queries to explore additional insights.
+
+
 ## Author - Nikhil Dagale
 This project is part of my portfolio, showcasing the SQL skills essential for data analyst roles. If you have any questions, or feedback, or would like to collaborate, feel free to get in touch!
 
 Data Download link: https://www.kaggle.com/datasets/muhammadehsan02/126-years-of-historical-olympic-dataset
-All dataset credits to the original author. This data analysis is done for educational purpose only.
+All dataset credits to the original author. This data analysis is done for educational purposes only.
